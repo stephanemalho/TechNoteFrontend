@@ -1,17 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
+import { useSelector } from 'react-redux'
 import { selectNoteById } from './notesApiSlice'
 
 const Note = ({ noteId }) => {
+
     const note = useSelector(state => selectNoteById(state, noteId))
+
     const navigate = useNavigate()
 
     if (note) {
-        const created = new Date(note.createdAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long' })
-        const updated = new Date(note.updatedAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long' })
+        const created = new Date(note.createdAt).toLocaleString('en-US', { day: 'numeric', month: 'long' })
+
+        const updated = new Date(note.updatedAt).toLocaleString('en-US', { day: 'numeric', month: 'long' })
+
         const handleEdit = () => navigate(`/dash/notes/${noteId}`)
 
         return (
@@ -26,6 +30,7 @@ const Note = ({ noteId }) => {
                 <td className="table__cell note__updated">{updated}</td>
                 <td className="table__cell note__title">{note.title}</td>
                 <td className="table__cell note__username">{note.username}</td>
+
                 <td className="table__cell">
                     <button
                         className="icon-button table__button"
@@ -36,6 +41,7 @@ const Note = ({ noteId }) => {
                 </td>
             </tr>
         )
+
     } else return null
 }
 export default Note
