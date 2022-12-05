@@ -146,6 +146,7 @@ const EditUserForm = ({ user }) => {
                     name="password"
                     type="password"
                     value={password}
+                    autoComplete="off"
                     onChange={onPasswordChanged}
                 />
 
